@@ -1,10 +1,11 @@
 package core;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Player {
+public class Player implements Serializable{
     private final String name;
     private final Board board;
     private final List<Ship> ships;

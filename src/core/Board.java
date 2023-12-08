@@ -1,6 +1,7 @@
 package core;
+import java.io.Serializable;
 
-public class Board {
+public class Board implements Serializable {
     private final int size = 10; // 10x10 board (Battleship standard)
     private Cell[][] cells;      // array of cells
 
@@ -14,6 +15,16 @@ public class Board {
             for (int col = 0; col < size; col++) {
                 cells[row][col] = new Cell(); // initialize each cell
             }
+        }
+    }
+    public boolean shootAt(int row, int col) {
+        Cell cell = cells[row][col];
+        if (cell.isHit()) {
+            // Cell has already been guessed, return false (miss)
+            return false;
+        } else {
+            cell.setHit(true); // Mark the cell as hit
+            return cell.isOccupied(); // Return true if it's a hit, false if it's a miss
         }
     }
 

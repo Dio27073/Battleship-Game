@@ -1,6 +1,8 @@
 package core;
 
-public class Game {
+import java.io.Serializable;
+
+public class Game implements Serializable {
     private final Player player1;
     private final Player player2;
     private Player currentPlayer;
@@ -15,6 +17,13 @@ public class Game {
     }
 
     // call when both players have finished placing ships
+    public Board getOpponentBoard(Player currentPlayer) {
+        if (currentPlayer == player1) {
+            return player2.getBoard();
+        } else {
+            return player1.getBoard();
+        }
+    }
     public void startGame() {
 
         if(gameState != GameState.SETUP) {
@@ -89,6 +98,11 @@ public class Game {
         }
         return (player1.hasLost()) ? player2 : player1;
     }
+    public void endTurn() {
+        // Logic to switch players
+        switchPlayer();
+    }
+
 
     //TODO add a method to restart the game
 }
